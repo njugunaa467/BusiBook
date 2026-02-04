@@ -10,13 +10,11 @@ import random
 app = Flask(__name__)
 app.secret_key = 'nairobi_vibes_2026'
 
-# --- 1. REMOTE DATABASE CONFIG (For FreeSQLDatabase) ---
-# Replace these values with the exact ones emailed to you by FreeSQLDatabase
 DB_CONFIG = {
-    'host': 'sqlX.freesqldatabase.com', # Change 'X' to your assigned server number
-    'user': 'your_db_user',
-    'password': 'your_db_password',
-    'database': 'your_db_name',
+    'host': 'sql7.freesqldatabase.com', 
+    'user': 'sql7816195',
+    'password': 'LxNl4bIrAK',
+    'database': 'sql7816195',
     'port': 3306,
     'ssl_disabled': True 
 }
