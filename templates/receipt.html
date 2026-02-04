@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Confirmed</title>
+    <style>
+        body { font-family: sans-serif; background: #eee; display: flex; justify-content: center; padding-top: 50px; }
+        .box { background: white; padding: 30px; border-radius: 12px; text-align: center; width: 350px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .success-icon { font-size: 50px; color: #34a853; }
+        .details { text-align: left; margin: 20px 0; font-size: 14px; border-top: 1px solid #eee; padding-top: 10px; }
+        .dl-btn { display: inline-block; background: #1a73e8; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="success-icon">✔</div>
+        <h2>Payment Verified!</h2>
+        <div class="details">
+            <p><strong>Name:</strong> {{ t.customer_name }}</p>
+            <p><strong>Ride:</strong> {{ t.bus_type }}</p>
+            <p><strong>Seat:</strong> {{ t.seat_number }}</p>
+        </div>
+        <a href="/download/{{ t.id }}" class="dl-btn">Download PDF Ticket</a>
+        <p><a href="/" style="color: #777; font-size: 12px;">Book another trip</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard | BusiBook</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
+        .navbar { background: #1a73e8; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .container { padding: 30px; }
+        .stats-row { display: flex; gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: white; padding: 20px; border-radius: 12px; flex: 1; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-bottom: 4px solid #34a853; }
+        .stat-card h3 { margin: 0; color: #555; font-size: 14px; text-transform: uppercase; }
+        .stat-card p { margin: 10px 0 0; font-size: 24px; font-weight: bold; color: #1a73e8; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        th { background: #e8f0fe; color: #1a73e8; padding: 15px; text-align: left; font-size: 13px; }
+        td { padding: 15px; border-bottom: 1px solid #eee; font-size: 14px; color: #333; }
+        tr:hover { background: #f9f9f9; }
+        .logout-btn { color: white; text-decoration: none; border: 1px solid white; padding: 6px 15px; border-radius: 5px; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>BusiBook Admin</h2>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+
+    <div class="container">
+        <div class="stats-row">
+            <div class="stat-card">
+                <h3>Total Bookings</h3>
+                <p>{{ tickets|length }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>System Status</h3>
+                <p style="color: #34a853;">Live</p>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Passenger Name</th>
+                    <th>Vehicle & Route</th>
+                    <th>Seat #</th>
+                    <th>Full Manifest Details (Travel Time / Booking Date / M-PESA)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for t in tickets %}
+                <tr>
+                    <td>#{{ t.id }}</td>
+                    <td><strong>{{ t.customer_name }}</strong></td>
+                    <td>{{ t.bus_type }}</td>
+                    <td>{{ t.seat_number }}</td>
+                    <td>{{ t.travel_time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

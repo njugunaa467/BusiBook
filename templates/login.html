@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BusiBook Admin Login</title>
+    <style>
+        body { background: #121212; color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: #1e1e1e; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 320px; text-align: center; border-top: 5px solid #fbbc05; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #333; background: #2c2c2c; color: white; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #fbbc05; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #eab000; transform: scale(1.02); }
+        h2 { margin-bottom: 20px; color: #fbbc05; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2>Admin Login</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username (admin)" required>
+            <input type="password" name="password" placeholder="Password (nairobi2026)" required>
+            <button type="submit">Enter Dashboard</button>
+        </form>
+    </div>
+</body>
+</html>

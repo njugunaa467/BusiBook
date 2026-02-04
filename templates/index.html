@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BusiBook Nairobi | Searchable Routes</title>
+    <style>
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; }
+        #bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+              background: url('/static/images/nairobipic.jpg') center/cover no-repeat; }
+        .overlay { min-height: 100vh; background: rgba(0,0,0,0.75); display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 15px; width: 100%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        label { font-size: 11px; font-weight: bold; color: #666; text-transform: uppercase; display: block; margin-top: 10px; }
+        input, select, button { width: 100%; padding: 12px; margin-top: 5px; border-radius: 8px; border: 1px solid #ddd; box-sizing: border-box; font-size: 14px; }
+        
+        button { background: #34a853; color: white; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        button:hover { background: #2d8e47; box-shadow: 0 0 20px #34a853, 0 0 40px #fbbc05; transform: translateY(-2px); }
+        
+        .fare-box { background: #e8f0fe; padding: 15px; text-align: center; margin-top: 15px; border-radius: 8px; border-left: 5px solid #1a73e8; }
+        #total_price { font-size: 1.4em; font-weight: bold; color: #1a73e8; }
+    </style>
+</head>
+<body>
+    <div id="bg"></div>
+    <div class="overlay">
+        <div class="card">
+            <h2 style="text-align: center; color: #1a73e8; margin: 0 0 15px 0;">BusiBook Nairobi</h2>
+            <form action="/book" method="POST">
+                
+                <label>Passenger Name</label>
+                <input type="text" name="name" placeholder="Enter Full Name" required>
+                
+                <label>Gender</label>
+                <select name="gender" required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <label>Vehicle Class</label>
+                <select name="vehicle_type" id="v_type" onchange="updateFare()">
+                    <option value="Ordinary">Ordinary Matatu</option>
+                    <option value="Nganya">Nganya (Music & LED)</option>
+                </select>
+
+                <label>Destination / Route #</label>
+                <input list="nairobi-routes" name="bus_type" id="r_input" placeholder="Type e.g. Rongai, 44, Umoja..." oninput="updateFare()" required>
+                
+                <datalist id="nairobi-routes">
+                    <option value="Route 111: CBD - Ngong">
+                    <option value="Route 125: CBD - Rongai">
+                    <option value="Route 126: CBD - Kiserian">
+                    <option value="Route 102: CBD - Dagoretti">
+                    <option value="Route 44: Odeon - Kahawa West">
+                    <option value="Route 45: CBD - Githurai">
+                    <option value="Route 237: CBD - Thika">
+                    <option value="Route 145: CBD - Ruiru">
+                    <option value="Route 33: CBD - Embakasi">
+                    <option value="Route 19/60: CBD - Kayole">
+                    <option value="Route 58: CBD - Buruburu">
+                    <option value="Route 34: CBD - Jomo Kenyatta Airport">
+                    <option value="Route 23: CBD - Westlands">
+                    <option value="Route 105: CBD - Kikuyu">
+                    <option value="Route 46: CBD - Kawangware">
+                    <option value="Route 110: CBD - Kitengela">
+                </datalist>
+
+                <label>Travel Time</label>
+                <select name="travel_time" required>
+                    <option value="06:30 AM">06:30 AM (Morning Rush)</option>
+                    <option value="10:00 AM">10:00 AM (Mid-Morning)</option>
+                    <option value="02:00 PM">02:00 PM (Afternoon)</option>
+                    <option value="05:30 PM">05:30 PM (Evening Rush)</option>
+                </select>
+
+                <label>Seat # (1-42)</label>
+                <input type="number" name="seat" min="1" max="42" required>
+
+                <label>M-PESA Transaction ID</label>
+                <input type="text" name="mpesa_id" placeholder="Ex: RQB56TY9P" style="text-transform: uppercase;" required>
+
+                <div class="fare-box">Current Fare: <span id="total_price">KES 80</span></div>
+                <button type="submit">Confirm & Get Ticket</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function updateFare() {
+        
+            const routeInput = document.getElementById('r_input').value.toLowerCase();
+            const vehicleType = document.getElementById('v_type').value;
+            const priceDisplay = document.getElementById('total_price');
+
+        
+            let basePrice = 80; 
+
+            if (routeInput.includes("ngong") || routeInput.includes("rongai") || routeInput.includes("kiserian")) {
+                basePrice = 120;
+            } else if (routeInput.includes("westlands") || routeInput.includes("upperhill")) {
+                basePrice = 50;
+            } else if (routeInput.includes("thika") || routeInput.includes("kitengela") || routeInput.includes("ruiru")) {
+                basePrice = 150;
+            }
+
+        
+            if (vehicleType === "Nganya") {
+                basePrice += 50;
+            }
+
+        
+            priceDisplay.innerText = "KES " + basePrice;
+        }
+    </script>
+</body>
+</html>
